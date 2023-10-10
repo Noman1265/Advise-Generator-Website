@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Advice generator app</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=AR+One+Sans:wght@400;500&family=Dela+Gothic+One&family=Epilogue:wght@500;700&family=Gabarito:wght@400;600&family=Nunito+Sans:opsz,wght@6..12,200;6..12,300&family=Nunito:wght@200;300&display=swap');
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body{
+      min-height: 100vh;
+      width: 100%;
+      font-family: 'AR One Sans', sans-serif;
+      font-family: 'Dela Gothic One', sans-serif;
+      font-family: 'Epilogue', sans-serif;
+      font-family: 'Gabarito', sans-serif;
+      font-family: 'Nunito', sans-serif;
+      font-family: 'Nunito Sans', sans-serif;
+      background-color: hsl(218, 23%, 16%);
+    }
+    #box{
+      background-color: hsl(217, 19%, 38%);
+      height: 300px;
+      width: 450px;
+      border-radius: 20px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      padding-top: 80px;
+      /* box-shadow: 2px 5px 6px hsl(217, 19%, 38%); */
+    }
+    .ad-num{
+      color: hsl(150, 100%, 66%);
+      margin-top: -50px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .advice{
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 900;
+      margin-top: 30px;
+      
+    }
+    .fa-grip-lines-vertical{
+      margin-top: 50px;
+      font-size: 25px;
+    }
+    .left-line{
+      height: 2px;
+      width: 120px;
+      background-color: #ffffff;
+      transform: translate(80px, 65px);
+    }
+    .right-line{
+      height: 2px;
+      width: 120px;
+      background-color: #ffffff;
+      transform: translate(248px, -13px);
+      display: block;
+    }
+    .button{
+      height: 50px;
+      width: 50px;
+      background-color: #52ffa8;
+      border-radius: 50%;
+      z-index: 2;
+      transform: translate(745px, 500px);
+      cursor: pointer;
+    }
+    .button i{
+      font-size: 30px;
+      /* display: flex;
+      align-items: center;
+      justify-content: space-between; */
+      transform: translate(11px, 10px);
+      cursor: pointer;
+    }
+    /* .ad-b{
+      width: 400px;
+      text-align: center;
+      transform: 10px, 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    } */
+  </style>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+  <section>
+    <div id="box">
+      <h4 class="ad-num">ADVICE # <span>00</span></h4>
+      <div class="ad-b">
+      <h2 class="advice"></h2>
+    </div>
+      <div class="left-line"></div><div class="resume"><i class="fa-solid fa-grip-lines-vertical" style="color: #ffffff;"></i></div><div class="right-line"></div>
+    </div>
+    <div class="button"><i class="fa-solid fa-dice-six" style="color: #1f2632;"></i></div>
+  </section>
+  <!-- Advice #Advice ID goes here -->
+
+  "<!-- Advice text goes here -->"
+  
+  <!-- <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div> -->
+  <script src="https://kit.fontawesome.com/bb5ccdae0d.js" crossorigin="anonymous"></script>
+
+  <script>
+    var button = document.querySelector(".fa-dice-six");
+    var button_2 = document.querySelector(".button");
+    var ad_num = document.querySelector(".ad-num span");
+    var advice = document.querySelector(".advice");
+
+    
+    var api = `https://api.adviceslip.com/advice`
+
+      async function Adviser(){
+      var calledapi = await fetch(api).then(response => response.json()).catch(error =>{
+        console.log("error")
+      });
+      console.log(calledapi)
+      button.addEventListener("click", function(){
+        ad_num.innerHTML = calledapi.slip.id
+        advice.innerHTML = calledapi.slip.advice
+
+      })
+    }
+    Adviser()
+
+    button_2.addEventListener("click", function(){
+      Adviser()
+    })
+    window.onload = () => {
+      Adviser()
+    }
+    
+    
+  </script>
+</body>
+</html>
